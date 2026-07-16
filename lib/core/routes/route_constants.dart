@@ -1,9 +1,9 @@
 class RouteConstants {
   RouteConstants._();
 
-  static const splash = '/';
+  // static const splash = '/';
 
-  static const login = '/login';
+  static const login = '/';
 
   static const signup = '/signup';
 

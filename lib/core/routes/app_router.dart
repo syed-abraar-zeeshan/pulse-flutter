@@ -1,16 +1,29 @@
 import 'package:go_router/go_router.dart';
 import 'package:pulse_flutter/core/routes/route_constants.dart';
-import 'package:pulse_flutter/features/auth/presentation/screens/splash_screen.dart';
+import 'package:pulse_flutter/features/auth/presentation/screens/login_screen.dart';
+import 'package:pulse_flutter/features/auth/presentation/screens/signup_screen.dart';
 
 class AppRouter {
   AppRouter._();
 
   static final router = GoRouter(
     routes: [
+      // GoRoute(
+      //   path: RouteConstants.splash,
+      //   builder: (context, state) {
+      //     return const SplashScreen();
+      //   },
+      // ),
       GoRoute(
-        path: RouteConstants.splash,
+        path: RouteConstants.login,
         builder: (context, state) {
-          return const SplashScreen();
+          return const LoginScreen();
+        },
+      ),
+      GoRoute(
+        path: RouteConstants.signup,
+        builder: (context, state) {
+          return const SignupScreen();
         },
       ),
     ],
