@@ -67,19 +67,12 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(
-                  height: AppSizes.xxl,
-                ),
-
+                const SizedBox(height: AppSizes.xxl),
                 const AuthHeader(
                   title: AppStrings.createAccount,
                   subtitle: AppStrings.letsGetStarted,
                 ),
-
-                const SizedBox(
-                  height: AppSizes.xl,
-                ),
-
+                const SizedBox(height: AppSizes.xl),
                 CustomTextField(
                   controller: _fullNameController,
                   hintText: AppStrings.fullNameHint,
@@ -87,62 +80,34 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                   textInputAction: TextInputAction.next,
                   validator: Validators.validateName,
                   onFieldSubmitted: (_) {
-                    FocusScope.of(
-                      context,
-                    ).requestFocus(
-                      _usernameFocusNode,
-                    );
+                    FocusScope.of(context).requestFocus(_usernameFocusNode);
                   },
                 ),
-
-                const SizedBox(
-                  height: AppSizes.md,
-                ),
-
-
-
+                const SizedBox(height: AppSizes.md),
                 CustomTextField(
                   controller: _emailController,
                   hintText: AppStrings.emailHint,
-                  keyboardType:
-                      TextInputType.emailAddress,
+                  keyboardType: TextInputType.emailAddress,
                   focusNode: _emailFocusNode,
                   textInputAction: TextInputAction.next,
                   validator: Validators.validateEmail,
                   onFieldSubmitted: (_) {
-                    FocusScope.of(
-                      context,
-                    ).requestFocus(
-                      _phoneFocusNode,
-                    );
+                    FocusScope.of(context).requestFocus(_phoneFocusNode);
                   },
                 ),
-
-                const SizedBox(
-                  height: AppSizes.md,
-                ),
-
+                const SizedBox(height: AppSizes.md),
                 CustomTextField(
                   controller: _phoneController,
                   hintText: AppStrings.phoneHint,
-                  keyboardType:
-                      TextInputType.phone,
+                  keyboardType: TextInputType.phone,
                   focusNode: _phoneFocusNode,
                   textInputAction: TextInputAction.next,
                   validator: Validators.validatePhone,
                   onFieldSubmitted: (_) {
-                    FocusScope.of(
-                      context,
-                    ).requestFocus(
-                      _passwordFocusNode,
-                    );
+                    FocusScope.of(context).requestFocus(_passwordFocusNode);
                   },
                 ),
-
-                const SizedBox(
-                  height: AppSizes.md,
-                ),
-
+                const SizedBox(height: AppSizes.md),
                 CustomTextField(
                   controller: _passwordController,
                   hintText: AppStrings.passwordHint,
@@ -153,8 +118,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                   suffixIcon: IconButton(
                     onPressed: () {
                       setState(() {
-                        _obscurePassword =
-                            !_obscurePassword;
+                        _obscurePassword = !_obscurePassword;
                       });
                     },
                     icon: Icon(
@@ -166,16 +130,10 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                   onFieldSubmitted: (_) {
                     FocusScope.of(
                       context,
-                    ).requestFocus(
-                      _confirmPasswordFocusNode,
-                    );
+                    ).requestFocus(_confirmPasswordFocusNode);
                   },
                 ),
-
-                const SizedBox(
-                  height: AppSizes.md,
-                ),
-
+                const SizedBox(height: AppSizes.md),
                 CustomTextField(
                   controller: _confirmPasswordController,
                   hintText: AppStrings.confirmPasswordHint,
@@ -201,45 +159,29 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                     ),
                   ),
                   onFieldSubmitted: (_) {
-                    FocusScope.of(
-                      context,
-                    ).unfocus();
+                    FocusScope.of(context).unfocus();
                   },
                 ),
-
-                const SizedBox(
-                  height: AppSizes.lg,
-                ),
-
+                const SizedBox(height: AppSizes.lg),
                 CustomButton(
                   text: AppStrings.signUp,
                   isLoading: isLoading,
                   onPressed: () {
-                    if (_formKey.currentState!
-                        .validate()) {
+                    if (_formKey.currentState!.validate()) {
                       // TODO: Call signup API
                     }
                   },
                 ),
-
-                const SizedBox(
-                  height: AppSizes.lg,
-                ),
-
+                const SizedBox(height: AppSizes.md),
                 Row(
-                  mainAxisAlignment:
-                      MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text(
-                      AppStrings.alreadyHaveAccount,
-                    ),
+                    const Text(AppStrings.alreadyHaveAccount),
                     TextButton(
                       onPressed: () {
                         context.pop();
                       },
-                      child: const Text(
-                        AppStrings.login,
-                      ),
+                      child: const Text(AppStrings.login),
                     ),
                   ],
                 ),
