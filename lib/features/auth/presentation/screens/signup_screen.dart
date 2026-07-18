@@ -4,8 +4,10 @@ import 'package:go_router/go_router.dart';
 import 'package:pulse_flutter/core/constants/app_sizes.dart';
 import 'package:pulse_flutter/core/constants/app_strings.dart';
 import 'package:pulse_flutter/core/utils/validators.dart';
+import 'package:pulse_flutter/features/auth/presentation/providers/auth_notifier.dart';
 import 'package:pulse_flutter/features/auth/presentation/widgets/auth_header.dart';
 import 'package:pulse_flutter/shared/widgets/custom_button.dart';
+import 'package:pulse_flutter/shared/widgets/custom_snackbar.dart';
 import 'package:pulse_flutter/shared/widgets/custom_text_field.dart';
 
 class SignupScreen extends ConsumerStatefulWidget {
@@ -19,14 +21,12 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
   final _formKey = GlobalKey<FormState>();
 
   final _fullNameController = TextEditingController();
-  final _usernameController = TextEditingController();
   final _emailController = TextEditingController();
   final _phoneController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
 
   final _fullNameFocusNode = FocusNode();
-  final _usernameFocusNode = FocusNode();
   final _emailFocusNode = FocusNode();
   final _phoneFocusNode = FocusNode();
   final _passwordFocusNode = FocusNode();
@@ -35,19 +35,15 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
   bool _obscurePassword = true;
   bool _obscureConfirmPassword = true;
 
-  bool isLoading = false;
-
   @override
   void dispose() {
     _fullNameController.dispose();
-    _usernameController.dispose();
     _emailController.dispose();
     _phoneController.dispose();
     _passwordController.dispose();
     _confirmPasswordController.dispose();
 
     _fullNameFocusNode.dispose();
-    _usernameFocusNode.dispose();
     _emailFocusNode.dispose();
     _phoneFocusNode.dispose();
     _passwordFocusNode.dispose();
@@ -58,6 +54,18 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final authState = ref.watch(authNotifierProvider);
+
+    ref.listen(authNotifierProvider, (previous, next) {
+      if (next.isSuccess) {
+        CustomSnackbar.showSuccess(context, 'Account created successfully');
+
+        context.pop();
+      } else if (next.errorMessage != null) {
+        CustomSnackbar.showError(context, next.errorMessage!);
+      }
+    });
+
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -80,7 +88,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                   textInputAction: TextInputAction.next,
                   validator: Validators.validateName,
                   onFieldSubmitted: (_) {
-                    FocusScope.of(context).requestFocus(_usernameFocusNode);
+                    FocusScope.of(context).requestFocus(_emailFocusNode);
                   },
                 ),
                 const SizedBox(height: AppSizes.md),
@@ -103,6 +111,10 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                   focusNode: _phoneFocusNode,
                   textInputAction: TextInputAction.next,
                   validator: Validators.validatePhone,
+                  prefixIcon: const Padding(
+                    padding: EdgeInsets.all(16),
+                    child: Text('+91'),
+                  ),
                   onFieldSubmitted: (_) {
                     FocusScope.of(context).requestFocus(_passwordFocusNode);
                   },
@@ -165,10 +177,17 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                 const SizedBox(height: AppSizes.lg),
                 CustomButton(
                   text: AppStrings.signUp,
-                  isLoading: isLoading,
+                  isLoading: authState.isLoading,
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      // TODO: Call signup API
+                      ref
+                          .read(authNotifierProvider.notifier)
+                          .signup(
+                            name: _fullNameController.text.trim(),
+                            email: _emailController.text.trim(),
+                            phoneNumber: '+91${_phoneController.text.trim()}',
+                            password: _passwordController.text.trim(),
+                          );
                     }
                   },
                 ),
