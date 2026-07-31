@@ -68,8 +68,20 @@ class AuthNotifier extends Notifier<AuthState> {
       );
     }
   }
+
+  void resetState() {
+    state = const AuthState();
+  }
 }
 
 final authNotifierProvider = NotifierProvider<AuthNotifier, AuthState>(
+  AuthNotifier.new,
+);
+
+final loginNotifierProvider = NotifierProvider<AuthNotifier, AuthState>(
+  AuthNotifier.new,
+);
+
+final signupNotifierProvider = NotifierProvider<AuthNotifier, AuthState>(
   AuthNotifier.new,
 );

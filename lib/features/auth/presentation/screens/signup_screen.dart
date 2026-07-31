@@ -36,6 +36,16 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
   bool _obscureConfirmPassword = true;
 
   @override
+  void initState() {
+    super.initState();
+    Future.microtask(() {
+      if (mounted) {
+        ref.read(signupNotifierProvider.notifier).resetState();
+      }
+    });
+  }
+
+  @override
   void dispose() {
     _fullNameController.dispose();
     _emailController.dispose();
@@ -54,15 +64,18 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final authState = ref.watch(authNotifierProvider);
+    final authState = ref.watch(signupNotifierProvider);
 
-    ref.listen(authNotifierProvider, (previous, next) {
+    ref.listen(signupNotifierProvider, (previous, next) {
       if (next.isSuccess) {
         CustomSnackbar.showSuccess(context, 'Account created successfully');
-
-        context.pop();
+        ref.read(signupNotifierProvider.notifier).resetState();
+        if (context.canPop()) {
+          context.pop();
+        }
       } else if (next.errorMessage != null) {
         CustomSnackbar.showError(context, next.errorMessage!);
+        ref.read(signupNotifierProvider.notifier).resetState();
       }
     });
 
@@ -181,7 +194,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       ref
-                          .read(authNotifierProvider.notifier)
+                          .read(signupNotifierProvider.notifier)
                           .signup(
                             name: _fullNameController.text.trim(),
                             email: _emailController.text.trim(),

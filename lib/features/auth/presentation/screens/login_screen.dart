@@ -30,27 +30,40 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   bool _obscurePassword = true;
 
   @override
+  void initState() {
+    super.initState();
+    Future.microtask(() {
+      if (mounted) {
+        ref.read(loginNotifierProvider.notifier).resetState();
+      }
+    });
+  }
+
+  @override
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
 
     _emailFocusNode.dispose();
-    _passwordController.dispose();
+    _passwordFocusNode.dispose();
 
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    final authState = ref.watch(authNotifierProvider);
+    final authState = ref.watch(loginNotifierProvider);
 
-    ref.listen(authNotifierProvider, (previous, next) {
+    ref.listen(loginNotifierProvider, (previous, next) {
       if (next.isSuccess) {
         CustomSnackbar.showSuccess(context, 'Logged in successfully');
-
-        context.pop();
+        ref.read(loginNotifierProvider.notifier).resetState();
+        if (context.canPop()) {
+          context.pop();
+        }
       } else if (next.errorMessage != null) {
         CustomSnackbar.showError(context, next.errorMessage!);
+        ref.read(loginNotifierProvider.notifier).resetState();
       }
     });
 
@@ -126,7 +139,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       ref
-                          .read(authNotifierProvider.notifier)
+                          .read(loginNotifierProvider.notifier)
                           .login(
                             email: _emailController.text.trim(),
                             password: _passwordController.text.trim(),
