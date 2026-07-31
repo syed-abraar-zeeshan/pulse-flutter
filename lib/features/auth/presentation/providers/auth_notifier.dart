@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:pulse_flutter/core/storage/secure_storage_service.dart';
 import 'package:pulse_flutter/features/auth/data/models/login_request.dart';
 import 'package:pulse_flutter/features/auth/data/models/signup_request.dart';
 import '../../data/repositories/auth_repository.dart';
@@ -57,7 +58,13 @@ class AuthNotifier extends Notifier<AuthState> {
 
       final request = LoginRequest(email: email, password: password);
 
-      await _repository.login(request);
+      // await _repository.login(request);
+
+      final response = await _repository.login(request);
+
+      if (response.token != null) {
+        await SecureStorageService.saveToken(response.token!);
+      }
 
       state = state.copyWith(isLoading: false, isSuccess: true);
     } catch (e) {
