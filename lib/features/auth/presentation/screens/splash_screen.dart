@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pulse_flutter/core/routes/route_constants.dart';
 import 'package:pulse_flutter/core/storage/secure_storage_service.dart';
+import 'package:pulse_flutter/features/profile/presentation/providers/profile_notifier.dart';
 
 class SplashScreen extends ConsumerStatefulWidget {
   const SplashScreen({super.key});
@@ -21,16 +22,26 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
   Future<void> _checkLoginStatus() async {
     final token = await SecureStorageService.getToken();
 
-    debugPrint("Token: $token");
+    if (!mounted) return;
+
+    // No token
+    if (token == null) {
+      context.go(RouteConstants.login);
+      return;
+    }
+
+    // Token exists
+    final success = await ref
+        .read(profileNotifierProvider.notifier)
+        .fetchUserProfile();
 
     if (!mounted) return;
 
-    if (token == null) {
-      debugPrint("Navigating to Login");
-      context.go(RouteConstants.login);
-    } else {
-      debugPrint("Navigating to Home");
+    if (success) {
       context.go(RouteConstants.home);
+    } else {
+      await SecureStorageService.clear();
+      context.go(RouteConstants.login);
     }
   }
 

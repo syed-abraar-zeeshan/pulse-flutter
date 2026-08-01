@@ -27,32 +27,45 @@ class AppStrings {
   static const phoneHint = 'Enter your phone number';
   static const confirmPasswordHint = 'Confirm your password';
 
+  // Home
+
+  static const welcomeBackToPulse = 'Welcome back to Pulse';
+  static const goodMorning = 'Good Morning ☀️';
+  static const goodAfternoon = 'Good Afternoon 🌤️';
+  static const goodEvening = 'Good Evening 🌙';
+  static const searchUsers = 'Search users...';
+
+  static const home = 'Home';
+  static const friends = 'Friends';
+  static const chats = 'Chats';
+  static const requests = 'Requests';
+  static const profile = 'Profile';
+
+  static const accept = 'Accept';
+  static const decline = 'Decline';
+
+  static const friendRequests = 'Friend Requests';
+  static const seeAll = 'See All';
+  static const wantsToConnect = 'Wants to connect with you';
+  static const recentChats = 'Recent Chats';
+
   // Validation messages
 
   static const enterFullName = 'Please enter your full name';
-  static const nameMinLength =
-      'Name must be at least 3 characters';
+  static const nameMinLength = 'Name must be at least 3 characters';
 
   static const enterUsername = 'Please enter your username';
-  static const usernameMinLength =
-      'Username must be at least 3 characters';
+  static const usernameMinLength = 'Username must be at least 3 characters';
 
   static const enterEmail = 'Please enter your email';
-  static const invalidEmail =
-      'Please enter a valid email';
+  static const invalidEmail = 'Please enter a valid email';
 
-  static const enterPhone =
-      'Please enter your phone number';
-  static const invalidPhone =
-      'Please enter a valid phone number';
+  static const enterPhone = 'Please enter your phone number';
+  static const invalidPhone = 'Please enter a valid phone number';
 
-  static const enterPassword =
-      'Please enter your password';
-  static const passwordMinLength =
-      'Password must be at least 8 characters';
+  static const enterPassword = 'Please enter your password';
+  static const passwordMinLength = 'Password must be at least 8 characters';
 
-  static const enterConfirmPassword =
-      'Please confirm your password';
-  static const passwordMismatch =
-      'Passwords do not match';
+  static const enterConfirmPassword = 'Please confirm your password';
+  static const passwordMismatch = 'Passwords do not match';
 }

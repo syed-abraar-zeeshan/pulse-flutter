@@ -35,9 +35,7 @@ class DarkTheme {
     cardTheme: CardThemeData(
       color: AppColors.darkCard,
       elevation: 0,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
     ),
 
     dividerTheme: const DividerThemeData(
@@ -50,9 +48,7 @@ class DarkTheme {
         backgroundColor: AppColors.primary,
         foregroundColor: AppColors.white,
         minimumSize: const Size(double.infinity, 52),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(14),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
       ),
     ),
 
@@ -66,24 +62,17 @@ class DarkTheme {
 
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(14),
-        borderSide: const BorderSide(
-          color: AppColors.inputBorderDark,
-        ),
+        borderSide: const BorderSide(color: AppColors.inputBorderDark),
       ),
 
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(14),
-        borderSide: const BorderSide(
-          color: AppColors.inputBorderDark,
-        ),
+        borderSide: const BorderSide(color: AppColors.inputBorderDark),
       ),
 
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(14),
-        borderSide: const BorderSide(
-          color: AppColors.primary,
-          width: 2,
-        ),
+        borderSide: const BorderSide(color: AppColors.primary, width: 2),
       ),
     ),
 
@@ -115,6 +104,40 @@ class DarkTheme {
       bodySmall: AppTextStyles.bodySmall.copyWith(
         color: AppColors.darkTextHint,
       ),
+
+      headlineSmall: AppTextStyles.headlineSmall.copyWith(
+        color: AppColors.darkTextPrimary,
+      ),
+
+      titleMedium: AppTextStyles.titleMedium.copyWith(
+        color: AppColors.darkTextPrimary,
+      ),
+
+      labelMedium: AppTextStyles.labelMedium.copyWith(
+        color: AppColors.darkTextPrimary,
+      ),
+    ),
+
+    navigationBarTheme: NavigationBarThemeData(
+      backgroundColor: AppColors.darkSurface,
+      indicatorColor: AppColors.primary.withValues(alpha: 0.20),
+
+      iconTheme: WidgetStateProperty.resolveWith((states) {
+        return IconThemeData(
+          color: states.contains(WidgetState.selected)
+              ? AppColors.primary
+              : AppColors.darkTextSecondary,
+        );
+      }),
+
+      labelTextStyle: WidgetStateProperty.resolveWith((states) {
+        return AppTextStyles.labelMedium.copyWith(
+          color: states.contains(WidgetState.selected)
+              ? AppColors.primary
+              : AppColors.darkTextSecondary,
+          fontWeight: FontWeight.w600,
+        );
+      }),
     ),
   );
 }

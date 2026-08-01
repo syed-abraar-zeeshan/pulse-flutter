@@ -43,4 +43,19 @@ class AppTextStyles {
     fontSize: 14,
     fontWeight: FontWeight.w600,
   );
+
+  static TextStyle headlineSmall = GoogleFonts.inter(
+    fontSize: 18,
+    fontWeight: FontWeight.w700,
+  );
+
+  static TextStyle titleMedium = GoogleFonts.inter(
+    fontSize: 16,
+    fontWeight: FontWeight.w600,
+  );
+
+  static TextStyle labelMedium = GoogleFonts.inter(
+    fontSize: 14,
+    fontWeight: FontWeight.w500,
+  );
 }

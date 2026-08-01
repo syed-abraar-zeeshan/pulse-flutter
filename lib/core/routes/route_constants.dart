@@ -15,7 +15,7 @@ class RouteConstants {
 
   static const friends = '/friends';
 
-  static const chat = '/chat';
+  static const chats = '/chats';
 
   static const settings = '/settings';
 }

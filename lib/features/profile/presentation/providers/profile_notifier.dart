@@ -12,13 +12,19 @@ class ProfileNotifier extends Notifier<ProfileState> {
     return const ProfileState();
   }
 
-  Future<void> fetchUserProfile() async {
+  Future<bool> fetchUserProfile() async {
     try {
       state = state.copyWith(isLoading: true, errorMessage: null);
+
       final user = await _profileRepository.getUserProfile();
+
       state = state.copyWith(isLoading: false, user: user);
+
+      return true;
     } catch (e) {
       state = state.copyWith(isLoading: false, errorMessage: e.toString());
+
+      return false;
     }
   }
 }

@@ -121,4 +121,46 @@ class AppColors {
   static const shimmerBase = Color(0xFFE2E8F0);
 
   static const shimmerHighlight = Color(0xFFF8FAFC);
+
+  static Color textPrimary(BuildContext context) {
+    return Theme.of(context).brightness == Brightness.dark
+        ? darkTextPrimary
+        : lightTextPrimary;
+  }
+
+  static Color textSecondary(BuildContext context) {
+    return Theme.of(context).brightness == Brightness.dark
+        ? darkTextSecondary
+        : lightTextSecondary;
+  }
+
+  static Color hint(BuildContext context) {
+    return Theme.of(context).brightness == Brightness.dark
+        ? darkTextHint
+        : lightTextHint;
+  }
+
+  static Color divider(BuildContext context) {
+    return Theme.of(context).brightness == Brightness.dark
+        ? darkDivider
+        : lightDivider;
+  }
+
+  static Color card(BuildContext context) {
+    return Theme.of(context).brightness == Brightness.dark
+        ? darkCard
+        : lightCard;
+  }
+
+  static Color border(BuildContext context) {
+    return Theme.of(context).brightness == Brightness.dark
+        ? darkBorder
+        : lightBorder;
+  }
+
+  static Color navigationBar(BuildContext context) {
+    return Theme.of(context).brightness == Brightness.dark
+        ? darkSurface
+        : lightSurface;
+  }
 }

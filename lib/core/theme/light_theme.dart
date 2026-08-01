@@ -35,9 +35,7 @@ class LightTheme {
     cardTheme: CardThemeData(
       color: AppColors.lightCard,
       elevation: 0,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
     ),
 
     dividerTheme: const DividerThemeData(
@@ -50,9 +48,7 @@ class LightTheme {
         backgroundColor: AppColors.primary,
         foregroundColor: AppColors.white,
         minimumSize: const Size(double.infinity, 52),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(14),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
       ),
     ),
 
@@ -66,24 +62,17 @@ class LightTheme {
 
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(14),
-        borderSide: const BorderSide(
-          color: AppColors.inputBorderLight,
-        ),
+        borderSide: const BorderSide(color: AppColors.inputBorderLight),
       ),
 
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(14),
-        borderSide: const BorderSide(
-          color: AppColors.inputBorderLight,
-        ),
+        borderSide: const BorderSide(color: AppColors.inputBorderLight),
       ),
 
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(14),
-        borderSide: const BorderSide(
-          color: AppColors.primary,
-          width: 2,
-        ),
+        borderSide: const BorderSide(color: AppColors.primary, width: 2),
       ),
     ),
 
@@ -115,6 +104,40 @@ class LightTheme {
       bodySmall: AppTextStyles.bodySmall.copyWith(
         color: AppColors.lightTextHint,
       ),
+
+      headlineSmall: AppTextStyles.headlineSmall.copyWith(
+        color: AppColors.lightTextPrimary,
+      ),
+
+      titleMedium: AppTextStyles.titleMedium.copyWith(
+        color: AppColors.lightTextPrimary,
+      ),
+
+      labelMedium: AppTextStyles.labelMedium.copyWith(
+        color: AppColors.lightTextPrimary,
+      ),
+    ),
+
+    navigationBarTheme: NavigationBarThemeData(
+      backgroundColor: AppColors.lightSurface,
+      indicatorColor: AppColors.primary.withValues(alpha: 0.15),
+
+      iconTheme: WidgetStateProperty.resolveWith((states) {
+        return IconThemeData(
+          color: states.contains(WidgetState.selected)
+              ? AppColors.primary
+              : AppColors.lightTextSecondary,
+        );
+      }),
+
+      labelTextStyle: WidgetStateProperty.resolveWith((states) {
+        return AppTextStyles.labelMedium.copyWith(
+          color: states.contains(WidgetState.selected)
+              ? AppColors.primary
+              : AppColors.lightTextSecondary,
+          fontWeight: FontWeight.w600,
+        );
+      }),
     ),
   );
 }

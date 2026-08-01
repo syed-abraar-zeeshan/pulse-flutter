@@ -3,7 +3,7 @@ import 'package:pulse_flutter/core/routes/route_constants.dart';
 import 'package:pulse_flutter/features/auth/presentation/screens/login_screen.dart';
 import 'package:pulse_flutter/features/auth/presentation/screens/signup_screen.dart';
 import 'package:pulse_flutter/features/auth/presentation/screens/splash_screen.dart';
-import 'package:pulse_flutter/features/home/presentation/home_screen.dart';
+import 'package:pulse_flutter/features/navigation/presentation/screens/bottom_navigation_screen.dart';
 
 class AppRouter {
   AppRouter._();
@@ -31,7 +31,8 @@ class AppRouter {
       GoRoute(
         path: RouteConstants.home,
         builder: (context, state) {
-          return const HomeScreen();
+          // return const HomeScreen();
+          return const BottomNavigationScreen();
         },
       ),
     ],
