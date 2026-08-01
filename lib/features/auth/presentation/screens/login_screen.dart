@@ -58,9 +58,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       if (next.isSuccess) {
         CustomSnackbar.showSuccess(context, 'Logged in successfully');
         ref.read(loginNotifierProvider.notifier).resetState();
-        if (context.canPop()) {
-          context.pop();
-        }
+        context.go(RouteConstants.home);
       } else if (next.errorMessage != null) {
         CustomSnackbar.showError(context, next.errorMessage!);
         ref.read(loginNotifierProvider.notifier).resetState();

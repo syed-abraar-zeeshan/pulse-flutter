@@ -7,6 +7,12 @@ class UserModel {
   final String profilePicture;
   final bool isOnline;
 
+  final List<String> friendRequests;
+  final List<String> friends;
+
+  final DateTime createdAt;
+  final DateTime updatedAt;
+
   const UserModel({
     required this.id,
     required this.name,
@@ -15,6 +21,10 @@ class UserModel {
     required this.bio,
     required this.profilePicture,
     required this.isOnline,
+    required this.friendRequests,
+    required this.friends,
+    required this.createdAt,
+    required this.updatedAt,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
@@ -23,9 +33,15 @@ class UserModel {
       name: json['name'],
       email: json['email'],
       phoneNumber: json['phoneNumber'],
-      bio: json['bio'],
-      profilePicture: json['profilePicture'],
-      isOnline: json['isOnline'],
+      bio: json['bio'] ?? '',
+      profilePicture: json['profilePicture'] ?? '',
+      isOnline: json['isOnline'] ?? false,
+
+      friendRequests: List<String>.from(json['friendRequests'] ?? []),
+      friends: List<String>.from(json['friends'] ?? []),
+
+      createdAt: DateTime.parse(json['createdAt']),
+      updatedAt: DateTime.parse(json['updatedAt']),
     );
   }
 }

@@ -6,4 +6,6 @@ class ApiEndpoints {
   static const String login = '/api/auth/login';
 
   static const String signup = '/api/auth/signup';
+
+  static const String getUserProfile = '/api/profile';
 }

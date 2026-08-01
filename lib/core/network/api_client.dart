@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:pulse_flutter/core/constants/api_endpoints.dart';
+import 'package:pulse_flutter/core/network/dio_interceptors.dart';
 
 class ApiClient {
   late final Dio dio;
@@ -13,5 +14,7 @@ class ApiClient {
         headers: {'Content-Type': 'application/json'},
       ),
     );
+
+    dio.interceptors.add(DioInterceptor());
   }
 }
