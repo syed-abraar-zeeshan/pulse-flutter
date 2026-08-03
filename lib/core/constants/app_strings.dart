@@ -49,6 +49,10 @@ class AppStrings {
   static const wantsToConnect = 'Wants to connect with you';
   static const recentChats = 'Recent Chats';
 
+  static const searchFriends = 'Search friends';
+  static const noFriendsYet = 'No friends yet';
+  static const startConnecting = 'Start connecting with people';
+  static const yourFriends = 'Your Friends';
   // Validation messages
 
   static const enterFullName = 'Please enter your full name';

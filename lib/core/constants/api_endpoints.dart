@@ -8,4 +8,8 @@ class ApiEndpoints {
   static const String signup = '/api/auth/signup';
 
   static const String getUserProfile = '/api/profile';
+
+  static const String friends = '/api/friends/';
+
+  static String searchFriends(String name) => '/api/friends/search?name=$name';
 }
