@@ -163,4 +163,16 @@ class AppColors {
         ? darkSurface
         : lightSurface;
   }
+
+  static Color skeletonBase(BuildContext context) {
+    return Theme.of(context).brightness == Brightness.dark
+        ? darkDivider
+        : shimmerBase;
+  }
+
+  static Color skeletonHighlight(BuildContext context) {
+    return Theme.of(context).brightness == Brightness.dark
+        ? darkBorder
+        : shimmerHighlight;
+  }
 }

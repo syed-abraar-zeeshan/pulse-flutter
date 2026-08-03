@@ -4,10 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pulse_flutter/core/constants/app_sizes.dart';
 import 'package:pulse_flutter/core/constants/app_strings.dart';
+import 'package:pulse_flutter/features/friends/data/models/friend_model.dart';
+import 'package:pulse_flutter/features/friends/data/placeholders/friend_placeholders.dart';
 import 'package:pulse_flutter/features/friends/presentation/providers/friend_notifier.dart';
 import 'package:pulse_flutter/features/friends/presentation/widgets/empty_friends.dart';
 import 'package:pulse_flutter/features/friends/presentation/widgets/friend_search_bar.dart';
 import 'package:pulse_flutter/features/friends/presentation/widgets/friends_list.dart';
+import 'package:pulse_flutter/features/friends/presentation/widgets/friends_loading.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class FriendsScreen extends ConsumerStatefulWidget {
   const FriendsScreen({super.key});
@@ -41,10 +45,6 @@ class _FriendsScreenState extends ConsumerState<FriendsScreen> {
     final friendState = ref.watch(friendNotifierProvider);
     final hasFriends = friendState.friends.isNotEmpty;
 
-    if (friendState.isLoading) {
-      return const Scaffold(body: Center(child: CircularProgressIndicator()));
-    }
-
     if (friendState.errorMessage != null) {
       return Scaffold(body: Center(child: Text(friendState.errorMessage!)));
     }
@@ -65,11 +65,8 @@ class _FriendsScreenState extends ConsumerState<FriendsScreen> {
               onChanged: (name) {
                 _debounce?.cancel();
                 _debounce = Timer(const Duration(milliseconds: 300), () {
-                  debugPrint(name);
                   ref.read(friendNotifierProvider.notifier).searchFriends(name);
                 });
-                // debugPrint(name);
-                // ref.read(friendNotifierProvider.notifier).searchFriends(name);
               },
             ),
             const SizedBox(height: AppSizes.xl),
@@ -79,7 +76,9 @@ class _FriendsScreenState extends ConsumerState<FriendsScreen> {
             ),
             const SizedBox(height: AppSizes.md),
             Expanded(
-              child: hasFriends
+              child: friendState.isLoading
+                  ? const FriendsLoading()
+                  : hasFriends
                   ? FriendsList(friends: friendState.friends)
                   : const EmptyFriends(),
             ),

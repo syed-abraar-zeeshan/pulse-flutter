@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pulse_flutter/features/friends/data/repositories/friend_repository.dart';
 import 'package:pulse_flutter/features/friends/presentation/providers/friend_provider.dart';
