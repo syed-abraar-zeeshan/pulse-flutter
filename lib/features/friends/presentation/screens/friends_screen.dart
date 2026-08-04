@@ -6,9 +6,11 @@ import 'package:pulse_flutter/core/constants/app_sizes.dart';
 import 'package:pulse_flutter/core/constants/app_strings.dart';
 import 'package:pulse_flutter/features/friends/presentation/providers/friend_notifier.dart';
 import 'package:pulse_flutter/features/friends/presentation/widgets/empty_friends.dart';
+import 'package:pulse_flutter/features/friends/presentation/widgets/empty_search_result.dart';
 import 'package:pulse_flutter/features/friends/presentation/widgets/friend_search_bar.dart';
 import 'package:pulse_flutter/features/friends/presentation/widgets/friends_list.dart';
 import 'package:pulse_flutter/features/friends/presentation/widgets/friends_loading.dart';
+import 'package:pulse_flutter/shared/widgets/app_error_widget.dart';
 
 class FriendsScreen extends ConsumerStatefulWidget {
   const FriendsScreen({super.key});
@@ -41,9 +43,20 @@ class _FriendsScreenState extends ConsumerState<FriendsScreen> {
   Widget build(BuildContext context) {
     final friendState = ref.watch(friendNotifierProvider);
     final hasFriends = friendState.friends.isNotEmpty;
+    final isSearching = _searchController.text.trim().isNotEmpty;
 
     if (friendState.errorMessage != null) {
-      return Scaffold(body: Center(child: Text(friendState.errorMessage!)));
+      return Scaffold(
+        body: AppErrorWidget(
+          icon: Icons.people_outline_rounded,
+          title: AppStrings.friendsErrorTitle,
+          message: friendState.errorMessage!,
+          onRetry: () {
+            debugPrint("Retry button clicked");
+            ref.read(friendNotifierProvider.notifier).getFriends();
+          },
+        ),
+      );
     }
 
     return SafeArea(
@@ -83,6 +96,16 @@ class _FriendsScreenState extends ConsumerState<FriendsScreen> {
                             .refreshFriends();
                       },
                       child: FriendsList(friends: friendState.friends),
+                    )
+                  : isSearching
+                  ? EmptySearchResult(
+                      onClearSearch: () {
+                        _searchController.clear();
+
+                        ref.read(friendNotifierProvider.notifier).getFriends();
+
+                        setState(() {});
+                      },
                     )
                   : const EmptyFriends(),
             ),

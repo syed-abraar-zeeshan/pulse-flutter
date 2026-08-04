@@ -18,8 +18,10 @@ class FriendNotifier extends Notifier<FriendState> {
     state = state.copyWith(isLoading: true, errorMessage: null);
     try {
       final friends = await _repository.getFriends();
+      debugPrint("Friends fetched: ${friends.length}");
       state = state.copyWith(isLoading: false, friends: friends);
     } catch (e) {
+      debugPrint("Error: $e");
       state = state.copyWith(isLoading: false, errorMessage: e.toString());
     }
   }

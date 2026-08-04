@@ -53,6 +53,16 @@ class AppStrings {
   static const noFriendsYet = 'No friends yet';
   static const startConnecting = 'Start connecting with people';
   static const yourFriends = 'Your Friends';
+
+  static const friendsErrorTitle = "Couldn't load friends";
+  static const retry = "Retry";
+  static const noInternet = "No Internet Connection";
+  static const noSearchResults = "No friends found";
+
+  static const noSearchResultsMessage =
+      "We couldn't find any friends matching your search.";
+  static const clearSearch = "Clear Search";
+
   // Validation messages
 
   static const enterFullName = 'Please enter your full name';

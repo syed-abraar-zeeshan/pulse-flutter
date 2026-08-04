@@ -30,5 +30,7 @@ class AppSizes {
   static const iconSm = 18.0;
   static const iconMd = 24.0;
   static const iconLg = 32.0;
+  static const iconXl = 48.0;
+  static const iconXxl = 72.0;
   static const double avatarIconScale = 0.9;
 }
