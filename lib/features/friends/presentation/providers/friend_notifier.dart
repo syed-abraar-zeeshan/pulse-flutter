@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pulse_flutter/features/friends/data/repositories/friend_repository.dart';
 import 'package:pulse_flutter/features/friends/presentation/providers/friend_provider.dart';
@@ -14,6 +14,7 @@ class FriendNotifier extends Notifier<FriendState> {
   }
 
   Future<void> getFriends() async {
+    debugPrint("Fetching friends...");
     state = state.copyWith(isLoading: true, errorMessage: null);
     try {
       final friends = await _repository.getFriends();
@@ -30,6 +31,17 @@ class FriendNotifier extends Notifier<FriendState> {
       state = state.copyWith(isLoading: false, friends: friends);
     } catch (e) {
       state = state.copyWith(isLoading: false, errorMessage: e.toString());
+    }
+  }
+
+  Future<void> refreshFriends() async {
+    debugPrint("Refreshing friends...");
+    state = state.copyWith(errorMessage: null);
+    try {
+      final friends = await _repository.getFriends();
+      state = state.copyWith(friends: friends);
+    } catch (e) {
+      state = state.copyWith(errorMessage: e.toString());
     }
   }
 }

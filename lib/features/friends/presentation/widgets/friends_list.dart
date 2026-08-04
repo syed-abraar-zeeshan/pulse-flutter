@@ -12,7 +12,7 @@ class FriendsList extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.separated(
       shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
+      physics: const AlwaysScrollableScrollPhysics(),
       itemCount: friends.length,
       separatorBuilder: (_, _) => const SizedBox(height: AppSizes.sm),
       itemBuilder: (context, index) {

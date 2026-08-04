@@ -4,14 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pulse_flutter/core/constants/app_sizes.dart';
 import 'package:pulse_flutter/core/constants/app_strings.dart';
-import 'package:pulse_flutter/features/friends/data/models/friend_model.dart';
-import 'package:pulse_flutter/features/friends/data/placeholders/friend_placeholders.dart';
 import 'package:pulse_flutter/features/friends/presentation/providers/friend_notifier.dart';
 import 'package:pulse_flutter/features/friends/presentation/widgets/empty_friends.dart';
 import 'package:pulse_flutter/features/friends/presentation/widgets/friend_search_bar.dart';
 import 'package:pulse_flutter/features/friends/presentation/widgets/friends_list.dart';
 import 'package:pulse_flutter/features/friends/presentation/widgets/friends_loading.dart';
-import 'package:skeletonizer/skeletonizer.dart';
 
 class FriendsScreen extends ConsumerStatefulWidget {
   const FriendsScreen({super.key});
@@ -79,7 +76,14 @@ class _FriendsScreenState extends ConsumerState<FriendsScreen> {
               child: friendState.isLoading
                   ? const FriendsLoading()
                   : hasFriends
-                  ? FriendsList(friends: friendState.friends)
+                  ? RefreshIndicator(
+                      onRefresh: () {
+                        return ref
+                            .read(friendNotifierProvider.notifier)
+                            .refreshFriends();
+                      },
+                      child: FriendsList(friends: friendState.friends),
+                    )
                   : const EmptyFriends(),
             ),
           ],
