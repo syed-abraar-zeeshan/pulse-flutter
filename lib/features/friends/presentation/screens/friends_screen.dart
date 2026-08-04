@@ -2,8 +2,11 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:pulse_flutter/core/constants/app_sizes.dart';
 import 'package:pulse_flutter/core/constants/app_strings.dart';
+import 'package:pulse_flutter/core/routes/route_constants.dart';
+import 'package:pulse_flutter/features/friend_requests/presentation/widgets/friend_requests_card.dart';
 import 'package:pulse_flutter/features/friends/presentation/providers/friend_notifier.dart';
 import 'package:pulse_flutter/features/friends/presentation/widgets/empty_friends.dart';
 import 'package:pulse_flutter/features/friends/presentation/widgets/empty_search_result.dart';
@@ -77,6 +80,13 @@ class _FriendsScreenState extends ConsumerState<FriendsScreen> {
                 _debounce = Timer(const Duration(milliseconds: 300), () {
                   ref.read(friendNotifierProvider.notifier).searchFriends(name);
                 });
+              },
+            ),
+            const SizedBox(height: AppSizes.md),
+            FriendRequestsCard(
+              requestCount: 3, // Temporary hardcoded value
+              onTap: () {
+                context.push(RouteConstants.friendRequests);
               },
             ),
             const SizedBox(height: AppSizes.xl),

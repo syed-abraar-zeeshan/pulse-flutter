@@ -19,7 +19,7 @@ class AppSizes {
 
   // Buttons
 
-  static const buttonHeight = 52.0;
+  static const buttonHeight = 40.0;
 
   // Text Fields
 
@@ -32,5 +32,9 @@ class AppSizes {
   static const iconLg = 32.0;
   static const iconXl = 48.0;
   static const iconXxl = 72.0;
+
   static const double avatarIconScale = 0.9;
+  static const avatarSm = 20.0;
+  static const avatarMd = 24.0;
+  static const avatarLg = 28.0;
 }

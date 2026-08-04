@@ -11,5 +11,7 @@ class ApiEndpoints {
 
   static const String friends = '/api/friends/';
 
+  static const String friendRequests = '/api/friends/requests';
+
   static String searchFriends(String name) => '/api/friends/search?name=$name';
 }

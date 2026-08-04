@@ -1,0 +1,5 @@
+import 'package:pulse_flutter/features/friend_requests/data/models/friend_request_model.dart';
+
+abstract class FriendRequestService {
+  Future<List<FriendRequestModel>> getFriendRequests();
+}

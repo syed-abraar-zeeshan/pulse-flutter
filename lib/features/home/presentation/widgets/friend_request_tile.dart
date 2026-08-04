@@ -99,7 +99,7 @@ class FriendRequestTile extends StatelessWidget {
                 Expanded(
                   child: OutlinedButton(
                     onPressed: onDecline,
-                    child: const Text(AppStrings.decline),
+                    child: const Text(AppStrings.reject),
                   ),
                 ),
               ],

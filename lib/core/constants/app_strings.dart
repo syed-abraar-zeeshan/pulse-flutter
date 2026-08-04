@@ -41,8 +41,8 @@ class AppStrings {
   static const requests = 'Requests';
   static const profile = 'Profile';
 
-  static const accept = 'Accept';
-  static const decline = 'Decline';
+  static const accept = "Accept";
+  static const reject = "Reject";
 
   static const friendRequests = 'Friend Requests';
   static const seeAll = 'See All';
@@ -62,6 +62,11 @@ class AppStrings {
   static const noSearchResultsMessage =
       "We couldn't find any friends matching your search.";
   static const clearSearch = "Clear Search";
+
+  static const reviewPendingRequests = "Review pending friend requests";
+  static const noFriendRequests = "No Friend Requests";
+  static const noPendingFriendRequests =
+      "You're all caught up! No pending requests.";
 
   // Validation messages
 
