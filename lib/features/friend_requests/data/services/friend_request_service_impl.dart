@@ -17,4 +17,9 @@ class FriendRequestServiceImpl implements FriendRequestService {
         .map((json) => FriendRequestModel.fromJson(json))
         .toList();
   }
+
+  @override
+  Future<void> acceptFriendRequest(String requestId) async {
+    await _apiService.post('${ApiEndpoints.friendAccept}/$requestId');
+  }
 }

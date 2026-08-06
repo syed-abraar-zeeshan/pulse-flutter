@@ -23,6 +23,24 @@ class FriendRequestNotifier extends Notifier<FriendRequestState> {
       state = state.copyWith(isLoading: false, errorMessage: e.toString());
     }
   }
+
+  Future<bool> acceptFriendRequest(String requestId) async {
+    try {
+      await _friendRequestRepository.acceptFriendRequest(requestId);
+
+      final updatedRequests = state.requests
+          .where((request) => request.id != requestId)
+          .toList();
+
+      state = state.copyWith(requests: updatedRequests, errorMessage: null);
+
+      return true;
+    } catch (e) {
+      state = state.copyWith(errorMessage: e.toString());
+
+      return false;
+    }
+  }
 }
 
 final friendRequestNotifierProvider =

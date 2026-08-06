@@ -10,4 +10,9 @@ class FriendRequestRepositoryImpl implements FriendRequestRepository {
   Future<List<FriendRequestModel>> getFriendRequests() async {
     return await _friendRequestService.getFriendRequests();
   }
+
+  @override
+  Future<void> acceptFriendRequest(String requestId) async {
+    return await _friendRequestService.acceptFriendRequest(requestId);
+  }
 }
