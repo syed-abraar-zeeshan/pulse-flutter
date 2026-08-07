@@ -32,11 +32,11 @@ class Validators {
       return AppStrings.enterEmail;
     }
 
-    final emailRegex = RegExp(
-      r'^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$',
-    );
+    final emailRegex = RegExp(r'^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$');
 
-    if (!emailRegex.hasMatch(value)) {
+    final email = value.trim();
+
+    if (!emailRegex.hasMatch(email)) {
       return AppStrings.invalidEmail;
     }
 
@@ -48,7 +48,14 @@ class Validators {
       return AppStrings.enterPhone;
     }
 
-    if (value.length != 10) {
+    final phone = value.trim();
+
+    if (phone.length != 10) {
+      return AppStrings.invalidPhone;
+    }
+    final phoneRegex = RegExp(r'^\d{10}$');
+
+    if (!phoneRegex.hasMatch(phone)) {
       return AppStrings.invalidPhone;
     }
 
@@ -67,15 +74,12 @@ class Validators {
     return null;
   }
 
-  static String? validateConfirmPassword(
-    String? value,
-    String password,
-  ) {
+  static String? validateConfirmPassword(String? value, String password) {
     if (value == null || value.trim().isEmpty) {
       return AppStrings.enterConfirmPassword;
     }
 
-    if (value != password) {
+    if (value.trim() != password.trim()) {
       return AppStrings.passwordMismatch;
     }
 
