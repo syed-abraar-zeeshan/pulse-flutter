@@ -20,6 +20,11 @@ class FriendRequestServiceImpl implements FriendRequestService {
 
   @override
   Future<void> acceptFriendRequest(String requestId) async {
-    await _apiService.post('${ApiEndpoints.friendAccept}/$requestId');
+    await _apiService.post('${ApiEndpoints.acceptFriend}/$requestId');
+  }
+
+  @override
+  Future<void> rejectFriendRequest(String requestId) async {
+    await _apiService.post('${ApiEndpoints.rejectFriend}/$requestId');
   }
 }

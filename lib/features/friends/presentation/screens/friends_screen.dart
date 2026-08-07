@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:pulse_flutter/core/constants/app_sizes.dart';
 import 'package:pulse_flutter/core/constants/app_strings.dart';
 import 'package:pulse_flutter/core/routes/route_constants.dart';
+import 'package:pulse_flutter/features/friend_requests/presentation/providers/friend_request_notifier.dart';
 import 'package:pulse_flutter/features/friend_requests/presentation/widgets/friend_requests_card.dart';
 import 'package:pulse_flutter/features/friends/presentation/providers/friend_notifier.dart';
 import 'package:pulse_flutter/features/friends/presentation/widgets/empty_friends.dart';
@@ -32,6 +33,7 @@ class _FriendsScreenState extends ConsumerState<FriendsScreen> {
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       ref.read(friendNotifierProvider.notifier).getFriends();
+      ref.read(friendRequestNotifierProvider.notifier).getFriendRequests();
     });
   }
 
@@ -45,6 +47,7 @@ class _FriendsScreenState extends ConsumerState<FriendsScreen> {
   @override
   Widget build(BuildContext context) {
     final friendState = ref.watch(friendNotifierProvider);
+    final friendRequestState = ref.watch(friendRequestNotifierProvider);
     final hasFriends = friendState.friends.isNotEmpty;
     final isSearching = _searchController.text.trim().isNotEmpty;
 
@@ -84,9 +87,14 @@ class _FriendsScreenState extends ConsumerState<FriendsScreen> {
             ),
             const SizedBox(height: AppSizes.md),
             FriendRequestsCard(
-              requestCount: 3, // Temporary hardcoded value
-              onTap: () {
+              requestCount: friendRequestState.requests.length,
+              onTap: () async {
                 context.push(RouteConstants.friendRequests);
+                if (mounted) {
+                  await ref
+                      .read(friendRequestNotifierProvider.notifier)
+                      .getFriendRequests();
+                }
               },
             ),
             const SizedBox(height: AppSizes.xl),

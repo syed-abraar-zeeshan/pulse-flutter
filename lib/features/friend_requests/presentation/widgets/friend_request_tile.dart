@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pulse_flutter/core/constants/app_sizes.dart';
 import 'package:pulse_flutter/core/constants/app_strings.dart';
 import 'package:pulse_flutter/core/theme/app_text_styles.dart';
-import 'package:pulse_flutter/features/friends/presentation/widgets/friend_avatar.dart';
+import 'package:pulse_flutter/shared/widgets/friend_avatar.dart';
 
 class FriendRequestTile extends StatelessWidget {
   final String name;

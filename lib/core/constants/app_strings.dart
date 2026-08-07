@@ -67,6 +67,7 @@ class AppStrings {
   static const noFriendRequests = "No Friend Requests";
   static const noPendingFriendRequests =
       "You're all caught up! No pending requests.";
+  static const findFriends = "Find Friends";
 
   // Validation messages
 

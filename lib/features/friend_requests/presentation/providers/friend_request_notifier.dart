@@ -41,6 +41,22 @@ class FriendRequestNotifier extends Notifier<FriendRequestState> {
       return false;
     }
   }
+
+  Future<bool> rejectFriendRequest(String requestId) async {
+    try {
+      await _friendRequestRepository.rejectFriendRequest(requestId);
+      final updatedRequest = state.requests
+          .where((request) => request.id != requestId)
+          .toList();
+
+      state = state.copyWith(requests: updatedRequest, errorMessage: null);
+      return true;
+    } catch (e) {
+      state = state.copyWith(errorMessage: e.toString());
+
+      return false;
+    }
+  }
 }
 
 final friendRequestNotifierProvider =

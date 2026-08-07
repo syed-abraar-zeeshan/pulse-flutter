@@ -15,4 +15,9 @@ class FriendRequestRepositoryImpl implements FriendRequestRepository {
   Future<void> acceptFriendRequest(String requestId) async {
     return await _friendRequestService.acceptFriendRequest(requestId);
   }
+
+  @override
+  Future<void> rejectFriendRequest(String requestId) async {
+    return await _friendRequestService.rejectFriendRequest(requestId);
+  }
 }

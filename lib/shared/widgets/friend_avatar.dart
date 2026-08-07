@@ -11,7 +11,7 @@ class FriendAvatar extends StatelessWidget {
     super.key,
     this.imageUrl,
     this.isOnline = false,
-    this.radius = 28,
+    this.radius = AppSizes.avatarMd,
   });
 
   @override

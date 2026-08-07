@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pulse_flutter/core/constants/app_sizes.dart';
 import 'package:pulse_flutter/core/theme/app_colors.dart';
-import 'package:pulse_flutter/features/friends/presentation/widgets/friend_avatar.dart';
+import 'package:pulse_flutter/shared/widgets/friend_avatar.dart';
 
 class FriendTile extends StatelessWidget {
   final String name;

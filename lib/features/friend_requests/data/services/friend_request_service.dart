@@ -3,4 +3,5 @@ import 'package:pulse_flutter/features/friend_requests/data/models/friend_reques
 abstract class FriendRequestService {
   Future<List<FriendRequestModel>> getFriendRequests();
   Future<void> acceptFriendRequest(String requestId);
+  Future<void> rejectFriendRequest(String requestId);
 }

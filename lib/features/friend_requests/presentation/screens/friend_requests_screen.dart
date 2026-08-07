@@ -44,7 +44,14 @@ class _FriendRequestsScreenState extends ConsumerState<FriendRequestsScreen> {
             )
           : state.requests.isEmpty
           ? const EmptyFriendRequests()
-          : FriendRequestsList(requests: state.requests),
+          : RefreshIndicator(
+              onRefresh: () {
+                return ref
+                    .read(friendRequestNotifierProvider.notifier)
+                    .getFriendRequests();
+              },
+              child: FriendRequestsList(requests: state.requests),
+            ),
     );
   }
 }

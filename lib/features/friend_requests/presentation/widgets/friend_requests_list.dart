@@ -36,8 +36,17 @@ class FriendRequestsList extends ConsumerWidget {
               );
             }
           },
-          onReject: () {
-            // TODO: Reject request
+          onReject: () async {
+            final success = await ref
+                .read(friendRequestNotifierProvider.notifier)
+                .rejectFriendRequest(request.id);
+
+            if (success && context.mounted) {
+              CustomSnackbar.showSuccess(
+                context,
+                "Friend request rejected successfully",
+              );
+            }
           },
         );
       },

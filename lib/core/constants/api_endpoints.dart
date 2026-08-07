@@ -15,5 +15,7 @@ class ApiEndpoints {
 
   static String searchFriends(String name) => '/api/friends/search?name=$name';
 
-  static const String friendAccept = "/api/friends/accept";
+  static const String acceptFriend = "/api/friends/accept";
+
+  static const String rejectFriend = "/api/friends/reject";
 }
