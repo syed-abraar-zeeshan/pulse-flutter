@@ -7,6 +7,7 @@ import 'package:pulse_flutter/core/constants/app_sizes.dart';
 import 'package:pulse_flutter/core/constants/app_strings.dart';
 import 'package:pulse_flutter/features/auth/presentation/providers/auth_notifier.dart';
 import 'package:pulse_flutter/features/auth/presentation/widgets/auth_header.dart';
+import 'package:pulse_flutter/features/chat/presentation/providers/socket_provider.dart';
 import 'package:pulse_flutter/shared/widgets/custom_button.dart';
 import 'package:pulse_flutter/shared/widgets/custom_snackbar.dart';
 import 'package:pulse_flutter/shared/widgets/custom_text_field.dart';
@@ -57,6 +58,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     ref.listen(loginNotifierProvider, (previous, next) {
       if (next.isSuccess) {
         CustomSnackbar.showSuccess(context, 'Logged in successfully');
+        ref.read(socketServiceProvider).connect();
         ref.read(loginNotifierProvider.notifier).resetState();
         context.go(RouteConstants.home);
       } else if (next.errorMessage != null) {
