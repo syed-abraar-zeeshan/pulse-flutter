@@ -18,4 +18,6 @@ class ApiEndpoints {
   static const String acceptFriend = "/api/friends/accept";
 
   static const String rejectFriend = "/api/friends/reject";
+
+  static const String getConversations = "/api/chat/conversations";
 }

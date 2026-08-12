@@ -1,5 +1,5 @@
 import 'package:pulse_flutter/features/chat/data/models/conversation_model.dart';
 
-abstract class ChatRepository {
+abstract class ChatService {
   Future<List<ConversationModel>> getConversations();
 }
